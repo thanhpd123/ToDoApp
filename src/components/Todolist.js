@@ -1,30 +1,21 @@
 import React from 'react'
 
+import TodoItem from './TodoItem';
+import Header from './Header';
+import Footer from './Footer';
+
 function Todolist(props) {
-    const { title, items } = props
+    const { title, items, addNew } = props;
+    const count = items.lenght;
     return (
         <div className="todolist">
-            <h1>{title.toUpperCase()}</h1>
+            <h1><Header title={title} addNew={addNew} /></h1>
             <ul className="list-unstyled">
-                {items.map(i => (
-                    <TodoItem data={i} />
-                ))}
+                {items.map(i => <TodoItem key={i.id} data={i} />)}
             </ul>
+            <Footer count={count} />
         </div>
-    )
-}
-
-function TodoItem(props) {
-    const { data } = props;
-    return (
-        <li key={data.id} className='ui-state-default'>
-            <div className='chexbox'>
-                <label>
-                    <input type="checkbox" value="" />{data.text}
-                </label>
-            </div>
-        </li>
     );
 }
 
-export default Todolist
+export default Todolist;
